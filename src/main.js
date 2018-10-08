@@ -37,7 +37,7 @@ var taskRanksBL = (function (_serviceModule) {
     };
 
     _module.getProgressPercentage = () => {
-        return Math.round((((completedTasks % 50) / 50) * 100));
+        return Math.round((((completedTasks % taskPerRank) / taskPerRank) * 100));
     }
 
     return _module;
