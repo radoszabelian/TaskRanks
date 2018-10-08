@@ -6,12 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Task Ranks</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="style/main.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/@fortawesome/fontawesome-free/css/all.css" />
     <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style/main.css" />
 </head>
 
+
+<div id="_templates" class="d-none">
+    <div class="_tier_star_template _tier-stripe padding-3 d-flex justify-content-between">
+        <i class="fas fa-star d-flex align-items-center"></i>
+        <img src="assets/tier/eagle.png" class="_img-eagle">
+        <i class="fas fa-star d-flex align-items-center"></i>
+    </div>
+</div>
+
+
 <body>
-    <div class="container">
+    <div class="container _main-box">
         <div class="row mb-3 mt-1">
             <div class="col text-center">
                 <h3 class="m-0 p-0">Completed tasks</h3>
@@ -23,19 +34,20 @@
             </div>
         </div>
         <div class="row my-2">
-            <div class="col text-center">
+            <div class="col-4"></div>
+            <div class="text-center col-4">
                 <img src="assets/ranks/hu/1.svg" id="_rank-image" />
+            </div>
+            <div id="_tier-stripe-container" class="col-4">
             </div>
         </div>
         <div class="row p-2 d-flex justify-content-between">
-            <div class="col-4"></div>
-            <div class="col-2">
+            <div class="col text-center">
                 <h2>Tier</h2>
             </div>
-            <div class="col-2 text-right">
-                <h2>0</h2>
+            <div class="col text-center">
+                <h2 id="_tier_title">0</h2>
             </div>
-            <div class="col-4"></div>
         </div>
         <div class="row my-2">
             <div class="col">
@@ -47,6 +59,11 @@
                         </span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col" id="_tier-stars">
+
             </div>
         </div>
     </div>

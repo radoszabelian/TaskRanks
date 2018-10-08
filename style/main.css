@@ -18,3 +18,20 @@ body {
 ._letter-spacing-02 {
     letter-spacing: 0.2em;
 }
+
+._main-box {
+    padding: 20px;
+    border: 1px dashed rgb(0, 0, 0);
+    margin-top: 3em;
+}
+
+._tier-stripe {
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: rgb(255, 230, 5);
+}
+
+._img-eagle {
+    max-height: 34px;
+    max-width: auto;
+}

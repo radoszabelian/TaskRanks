@@ -31,13 +31,13 @@ var taskRanksBL = (function (_serviceModule) {
         })
     }
 
-    function computeRankStates () {
+    function computeRankStates() {
         currentTier = Math.floor(completedTasks / (allRanksCount * taskPerRank)) + 1;
         currentRank = Math.floor((completedTasks - (allRanksCount * taskPerRank * (currentTier - 1))) / taskPerRank) + 1;
     };
 
     _module.getProgressPercentage = () => {
-        return Math.round((((completedTasks % 50) / 50)*100));
+        return Math.round((((completedTasks % 50) / 50) * 100));
     }
 
     return _module;
@@ -46,17 +46,28 @@ var taskRanksBL = (function (_serviceModule) {
 var uiController = (function (_blModule) {
     let _module = {};
 
+    function generateTierStripesTo(element) {
+        for (let i = 1; i < _blModule.getCurrentTier(); i++) {
+            let tierStripeTemplate = document.querySelector("#_templates > ._tier_star_template").cloneNode(true);
+            element.appendChild(tierStripeTemplate);
+        }
+    }
+
     _module.refreshUi = () => {
         _blModule.refreshData().then(() => {
             let completedTasksElement = document.getElementById("_completed-tasks-count");
             let progressBarElement = document.getElementById("_progress-bar");
             let progressTitleElement = document.getElementById("_progress-title");
             let rankImageElement = document.getElementById("_rank-image");
+            let tierTitleElement = document.getElementById("_tier_title");
+            let tierStripesContainerElement = document.getElementById("_tier-stripe-container");
 
             completedTasksElement.innerHTML = taskRanksBL.getCompletedTasks();
             progressBarElement.setAttribute("style", `width: ${taskRanksBL.getProgressPercentage()}%`);
             progressTitleElement.innerHTML = `LEVEL ${taskRanksBL.getCurrentRank()}`;
             rankImageElement.setAttribute("src", `assets/ranks/hu/${taskRanksBL.getCurrentRank()}.svg`)
+            tierTitleElement.innerHTML = taskRanksBL.getCurrentTier();
+            generateTierStripesTo(tierStripesContainerElement);
         });
     };
 
@@ -69,7 +80,7 @@ var dataService = (function () {
     _module.getData = () => {
         return new Promise((resolve, reject) => {
             resolve({
-                completedTasks: 106,
+                completedTasks: 0,
                 taskPerRank: 50,
                 allRanksCount: 20
             });
