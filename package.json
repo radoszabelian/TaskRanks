@@ -1,0 +1,23 @@
+{
+  "name": "taskranks",
+  "version": "1.0.0",
+  "description": "Fun app to get military ranks by solving tasks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radoszabelian/TaskRanks.git"
+  },
+  "author": "Belián Radosza <radoszabelian@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/radoszabelian/TaskRanks/issues"
+  },
+  "dependencies": {
+    "bootstrap": "4.1.3"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/radoszabelian/TaskRanks#readme"
+}
