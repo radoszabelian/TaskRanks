@@ -1,13 +1,56 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Task Ranks</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style/main.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css" />
     <script src="src/main.js"></script>
 </head>
+
 <body>
+    <div class="container">
+        <div class="row mb-3 mt-1">
+            <div class="col text-center">
+                <h3 class="m-0 p-0">Completed tasks</h3>
+            </div>
+        </div>
+        <div class="row p-2">
+            <div class="col text-center">
+                <h2 id="_completed-tasks-count">123</h2>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col text-center">
+                <img src="assets/ranks/hu/1.svg" id="_rank-image" />
+            </div>
+        </div>
+        <div class="row p-2 d-flex justify-content-between">
+            <div class="col-4"></div>
+            <div class="col-2">
+                <h2>Tier</h2>
+            </div>
+            <div class="col-2 text-right">
+                <h2>0</h2>
+            </div>
+            <div class="col-4"></div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
+                        aria-valuemax="100">
+                        <span class="font-weight-bold _letter-spacing-02">
+                            LEVEL 1
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
-</html>l
+
+</html>
