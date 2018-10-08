@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" media="screen" href="style/main.css" />
 </head>
 
-
 <div id="_templates" class="d-none">
     <div class="_tier_star_template _tier-stripe padding-3 d-flex justify-content-between">
         <i class="fas fa-star d-flex align-items-center"></i>
@@ -20,7 +19,6 @@
     </div>
 </div>
 
-
 <body>
     <div class="container _main-box">
         <div class="row mb-3 mt-1">
@@ -28,9 +26,21 @@
                 <h3 class="m-0 p-0">Completed tasks</h3>
             </div>
         </div>
-        <div class="row p-2">
+        <div class="row p-2" onmouseenter="uiController.toggleEditUi(true)" onmouseleave="uiController.toggleEditUi(false)">
+            <div class="col-3 d-flex align-items-center" id="_left_edit_container" style="display: none !important">
+                <input type="number" class="_edit-input mr-1" id="_edit-input-remove" />
+                <button class="btn btn-danger rounded-circle" onclick="uiController.removeCompletedTask(event)">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
             <div class="col text-center">
                 <h2 id="_completed-tasks-count">0</h2>
+            </div>
+            <div class="col-3 d-flex align-items-center justify-content-end" id="_right_edit_container" style="display: none !important">
+                <input type="number" class="_edit-input mr-1" id="_edit-input-add" />
+                <button class="btn btn-success rounded-circle" onclick="uiController.addCompletedTask(event)">
+                    <i class="fas fa-plus"></i>
+                </button>
             </div>
         </div>
         <div class="row my-2">
@@ -67,6 +77,29 @@
             </div>
         </div>
     </div>
+
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-firestore.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyB7i3FHlfNSAGd573GtJwIB5x-Bsvwhcmo",
+            authDomain: "tasksrank.firebaseapp.com",
+            databaseURL: "https://tasksrank.firebaseio.com",
+            projectId: "tasksrank",
+            storageBucket: "tasksrank.appspot.com",
+            messagingSenderId: "794886809742"
+        };
+        firebase.initializeApp(config);
+        // Initialize Cloud Firestore through Firebase
+        var db = firebase.firestore();
+
+        // Disable deprecated features
+        db.settings({
+            timestampsInSnapshots: true
+        });
+    </script>
 
     <script src="src/main.js"></script>
     <script>

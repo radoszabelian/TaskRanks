@@ -35,3 +35,7 @@ body {
     max-height: 34px;
     max-width: auto;
 }
+
+._edit-input {
+    width: 60px;
+}

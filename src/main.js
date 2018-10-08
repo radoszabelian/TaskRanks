@@ -31,6 +31,10 @@ var taskRanksBL = (function (_serviceModule) {
         })
     }
 
+    _module.addCompletedTasks = (howMany) => {
+        _serviceModule.setCompletedTasksNumber(completedTasks + howMany);
+    }
+
     function computeRankStates() {
         currentTier = Math.floor(completedTasks / (allRanksCount * taskPerRank)) + 1;
         currentRank = Math.floor((completedTasks - (allRanksCount * taskPerRank * (currentTier - 1))) / taskPerRank) + 1;
@@ -53,6 +57,22 @@ var uiController = (function (_blModule) {
         }
     }
 
+    _module.addCompletedTask = (event) => {
+        let inputElement = document.querySelector("#_edit-input-add");
+        if (Number.isInteger(parseInt(inputElement.value)) && parseInt(inputElement.value) >= 0) {
+            _blModule.addCompletedTasks(parseInt(inputElement.value));
+        }
+        inputElement.value = 0;
+    }
+
+    _module.removeCompletedTask = (event) => {
+        let inputElement = document.querySelector("#_edit-input-remove");
+        if (Number.isInteger(parseInt(inputElement.value)) && parseInt(inputElement.value) >= 0) {
+            //change data in db
+        }
+        inputElement.value = 0;
+    }
+
     _module.refreshUi = () => {
         _blModule.refreshData().then(() => {
             let completedTasksElement = document.getElementById("_completed-tasks-count");
@@ -71,25 +91,50 @@ var uiController = (function (_blModule) {
         });
     };
 
+    _module.toggleEditUi = (show = false) => {
+        let addUiElement = document.querySelector("#_left_edit_container");
+        let removeUiElement = document.querySelector("#_right_edit_container");
+        addUiElement.setAttribute("style", show ? "" : "display: none !important");
+        removeUiElement.setAttribute("style", show ? "" : "display: none !important");
+    }
+
     return _module;
 });
 
-var dataService = (function () {
+var dataService = (function (_db) {
+    const collectionName = "tasksData";
+    const dataId = "1u9py6jeSm7ANGCKwYS4";
+
     let _module = {};
 
-    _module.getData = () => {
+    function readDataFromDb() {
         return new Promise((resolve, reject) => {
-            resolve({
-                completedTasks: 0,
-                taskPerRank: 50,
-                allRanksCount: 20
+            _db.collection(collectionName).get().then((querySnapshot) => {
+                resolve(querySnapshot.docs[0].data());
+            }, err => {
+                console.error(err);
+                reject(err);
             });
-        });
+        })
+    }
+
+    _module.getData = () => {
+        return readDataFromDb();
     };
+
+    _module.setCompletedTasksNumber = (completedTasksNumber) => {
+        if (Number.isInteger(completedTasksNumber)) {
+            db.ref(`-${collectionName}/-${dataId}/completedTasks`).set(completedTasksNumber)
+            console.log("Data added");
+        } else {
+            console.error("Data adding failed!!!");
+        }
+    }
+
 
     return _module;
 });
 
-var dataService = dataService();
+var dataService = dataService(db);
 var taskRanksBL = taskRanksBL(dataService);
 var uiController = uiController(taskRanksBL);
