@@ -45,7 +45,7 @@ var uiController = (function (_blModule) {
             completedTasksElement.innerHTML = taskRanksBL.getCompletedTasks();
             progressBarElement.setAttribute("style", `width: ${taskRanksBL.getProgressPercentage()}%`);
             progressTitleElement.innerHTML = `LEVEL ${taskRanksBL.getCurrentRank()}`;
-            rankImageElement.setAttribute("src", `assets/ranks/hu/${taskRanksBL.getCurrentRank()}.svg`)
+            rankImageElement.setAttribute("src", `assets/ranks/${taskRanksBL.getCurrentRankNation()}/${taskRanksBL.getCurrentRank()}.svg`)
             tierTitleElement.innerHTML = taskRanksBL.getCurrentTier();
             generateTierStripesTo(tierStripesContainerElement);
         });
@@ -62,6 +62,9 @@ var taskRanksBL = (function (_serviceModule) {
     let completedTasks = 0;
     let taskPerRank = 0;
     let allRanksCount = 0;
+    let currentRankNation = "hu"; 
+
+    _module.getCurrentRankNation = () => currentRankNation;
 
     _module.getCurrentRank = () => {
         return currentRank;
@@ -80,60 +83,7 @@ var taskRanksBL = (function (_serviceModule) {
             _serviceModule.getData().then((data) => {
                 taskPerRank = data.taskPerRank;
                 completedTasks = data.completedTasks;
-                allRanksCount = data.allRanksCount;
-                computeRankStates();
-                resolve();
-            });
-        })
-    }
-
-    _module.addCompletedTasks = (howMany) => {
-        _serviceModule.setCompletedTasksNumber(completedTasks + howMany);
-    }
-
-    _module.removeCompletedTasks = (howMany) => {
-        _serviceModule.setCompletedTasksNumber(completedTasks - howMany);
-    }
-
-    function computeRankStates() {
-        currentTier = Math.floor(completedTasks / (allRanksCount * taskPerRank)) + 1;
-        currentRank = Math.floor((completedTasks - (allRanksCount * taskPerRank * (currentTier - 1))) / taskPerRank) + 1;
-    };
-
-    _module.getProgressPercentage = () => {
-        return Math.round((((completedTasks % taskPerRank) / taskPerRank) * 100));
-    }
-
-    return _module;
-});
-
-
-var taskRanksBL = (function (_serviceModule) {
-    let _module = {};
-
-    let currentRank = 0;
-    let currentTier = 0;
-    let completedTasks = 0;
-    let taskPerRank = 0;
-    let allRanksCount = 0;
-
-    _module.getCurrentRank = () => {
-        return currentRank;
-    };
-
-    _module.getCurrentTier = () => {
-        return currentTier;
-    }
-
-    _module.getCompletedTasks = () => {
-        return completedTasks;
-    }
-
-    _module.refreshData = () => {
-        return new Promise((resolve, reject) => {
-            _serviceModule.getData().then((data) => {
-                taskPerRank = data.taskPerRank;
-                completedTasks = data.completedTasks;
+                currentRankNation = data.currentRankNation;
                 allRanksCount = data.allRanksCount;
                 computeRankStates();
                 resolve();
