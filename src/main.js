@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var taskRanksBL = (function (_serviceModule) {
     let _module = {};
 
@@ -51,6 +52,8 @@ var taskRanksBL = (function (_serviceModule) {
     return _module;
 });
 
+=======
+>>>>>>> 896868226a177dc4c8501a1a14f8bad97985872d
 var uiController = (function (_blModule) {
     let _module = {};
 
@@ -64,7 +67,11 @@ var uiController = (function (_blModule) {
     _module.addCompletedTask = (event) => {
         let inputElement = document.querySelector("#_edit-input-add");
         if (Number.isInteger(parseInt(inputElement.value)) && parseInt(inputElement.value) >= 0) {
-            _blModule.addCompletedTasks(parseInt(inputElement.value));
+            _blModule.addCompletedTasks(parseInt(inputElement.value)).then(() => {
+                _blModule.refreshData().then(() => {
+                    _module.refreshUi();
+                })
+            });
         }
         inputElement.value = 0;
     }
@@ -72,7 +79,16 @@ var uiController = (function (_blModule) {
     _module.removeCompletedTask = (event) => {
         let inputElement = document.querySelector("#_edit-input-remove");
         if (Number.isInteger(parseInt(inputElement.value)) && parseInt(inputElement.value) >= 0) {
+<<<<<<< HEAD
             _blModule.removeCompletedTasks(parseInt(inputElement.value));
+=======
+            _blModule.removeCompletedTasks(parseInt(inputElement.value)).then(() => {
+                _blModule.refreshData().then(() => {
+                    _module.refreshUi();
+                })
+            });
+
+>>>>>>> 896868226a177dc4c8501a1a14f8bad97985872d
         }
         inputElement.value = 0;
     }
@@ -105,6 +121,59 @@ var uiController = (function (_blModule) {
     return _module;
 });
 
+var taskRanksBL = (function (_serviceModule) {
+    let _module = {};
+
+    let currentRank = 0;
+    let currentTier = 0;
+    let completedTasks = 0;
+    let taskPerRank = 0;
+    let allRanksCount = 0;
+
+    _module.getCurrentRank = () => {
+        return currentRank;
+    };
+
+    _module.getCurrentTier = () => {
+        return currentTier;
+    }
+
+    _module.getCompletedTasks = () => {
+        return completedTasks;
+    }
+
+    _module.refreshData = () => {
+        return new Promise((resolve, reject) => {
+            _serviceModule.getData().then((data) => {
+                taskPerRank = data.taskPerRank;
+                completedTasks = data.completedTasks;
+                allRanksCount = data.allRanksCount;
+                computeRankStates();
+                resolve();
+            });
+        })
+    }
+
+    _module.addCompletedTasks = (howMany) => {
+        return _serviceModule.setCompletedTasksNumber(completedTasks + howMany);
+    }
+
+    _module.removeCompletedTasks = (howMany) => {
+        return _serviceModule.setCompletedTasksNumber(completedTasks - howMany);
+    }
+
+    function computeRankStates() {
+        currentTier = Math.floor(completedTasks / (allRanksCount * taskPerRank)) + 1;
+        currentRank = Math.floor((completedTasks - (allRanksCount * taskPerRank * (currentTier - 1))) / taskPerRank) + 1;
+    };
+
+    _module.getProgressPercentage = () => {
+        return Math.round((((completedTasks % taskPerRank) / taskPerRank) * 100));
+    }
+
+    return _module;
+});
+
 var dataService = (function (_db) {
     const collectionName = "tasksData";
     const dataId = "1u9py6jeSm7ANGCKwYS4";
@@ -127,14 +196,30 @@ var dataService = (function (_db) {
     };
 
     _module.setCompletedTasksNumber = (completedTasksNumber) => {
+<<<<<<< HEAD
         if (Number.isInteger(completedTasksNumber)) {
             // db.ref(`-${collectionName}/-${dataId}/completedTasks`).set(completedTasksNumber)
             console.log("Data added");
         } else {
             console.error("Data adding failed!!!");
         }
+=======
+        return new Promise((resolve, reject) => {
+            if (Number.isInteger(completedTasksNumber)) {
+                db.collection(collectionName).doc(dataId).set({
+                    completedTasks: completedTasksNumber
+                }, { merge: true })
+                    .then(() => {
+                        resolve();
+                    }, () => {
+                        reject();
+                    });
+            } else {
+                reject();
+            }
+        })
+>>>>>>> 896868226a177dc4c8501a1a14f8bad97985872d
     }
-
 
     return _module;
 });

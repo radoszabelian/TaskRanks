@@ -44,6 +44,7 @@ body {
     width: 60px;
 }
 
+<<<<<<< HEAD
 #_top_header {
     padding: 20px;
     background-color: #222f3e;
@@ -127,4 +128,14 @@ body {
 
 ._bg-grey4 {
     background-color: #222f3e;
+=======
+#_edit_fields_container {
+    transition: 300ms all;
+    border: 1px solid rgb(150, 150, 150);
+}
+
+#_edit_fields_container:hover {
+    background-color: rgb(240,240,240);
+    border: 1px solid rgb(200,200,200);
+>>>>>>> 896868226a177dc4c8501a1a14f8bad97985872d
 }
