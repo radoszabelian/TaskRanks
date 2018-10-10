@@ -35,6 +35,10 @@ var taskRanksBL = (function (_serviceModule) {
         _serviceModule.setCompletedTasksNumber(completedTasks + howMany);
     }
 
+    _module.removeCompletedTasks = (howMany) => {
+        _serviceModule.setCompletedTasksNumber(completedTasks - howMany);
+    }
+
     function computeRankStates() {
         currentTier = Math.floor(completedTasks / (allRanksCount * taskPerRank)) + 1;
         currentRank = Math.floor((completedTasks - (allRanksCount * taskPerRank * (currentTier - 1))) / taskPerRank) + 1;
@@ -68,7 +72,7 @@ var uiController = (function (_blModule) {
     _module.removeCompletedTask = (event) => {
         let inputElement = document.querySelector("#_edit-input-remove");
         if (Number.isInteger(parseInt(inputElement.value)) && parseInt(inputElement.value) >= 0) {
-            //change data in db
+            _blModule.removeCompletedTasks(parseInt(inputElement.value));
         }
         inputElement.value = 0;
     }
@@ -124,7 +128,7 @@ var dataService = (function (_db) {
 
     _module.setCompletedTasksNumber = (completedTasksNumber) => {
         if (Number.isInteger(completedTasksNumber)) {
-            db.ref(`-${collectionName}/-${dataId}/completedTasks`).set(completedTasksNumber)
+            // db.ref(`-${collectionName}/-${dataId}/completedTasks`).set(completedTasksNumber)
             console.log("Data added");
         } else {
             console.error("Data adding failed!!!");
