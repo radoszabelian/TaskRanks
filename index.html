@@ -20,17 +20,13 @@
 </div>
 
 <body>
-    <div id="_top_header">
+    <div id="_top_header" class="text-center">
+            <h3 class="m-0 p-0">Completed tasks</h3>
     </div>
 
     <div class="container _main-box">
-        <div class="row mb-3 mt-1">
-            <div class="col text-center">
-                <h3 class="m-0 p-0">Completed tasks</h3>
-            </div>
-        </div>
-        <div class="row p-2" id="_edit_fields_container" onmouseenter="uiController.toggleEditUi(true)" onmouseleave="uiController.toggleEditUi(false)">
-            <div class="col-3 d-flex align-items-center" id="_left_edit_container" style="display: none !important">
+        <div class="row p-2" id="_edit_fields_container">
+            <div class="col-3 d-flex align-items-center" id="_left_edit_container" >
                 <input type="number" class="_edit-input mr-1" id="_edit-input-remove" />
                 <button class="btn btn-danger rounded-circle" onclick="uiController.removeCompletedTask(event)">
                     <i class="fas fa-minus"></i>
@@ -39,7 +35,7 @@
             <div class="col text-center">
                 <h2 id="_completed-tasks-count">0</h2>
             </div>
-            <div class="col-3 d-flex align-items-center justify-content-end" id="_right_edit_container" style="display: none !important">
+            <div class="col-3 d-flex align-items-center justify-content-end" id="_right_edit_container" >
                 <input type="number" class="_edit-input mr-1" id="_edit-input-add" />
                 <button class="btn btn-success rounded-circle" onclick="uiController.addCompletedTask(event)">
                     <i class="fas fa-plus"></i>
@@ -64,7 +60,7 @@
         </div>
         <div class="row my-2">
             <div class="col">
-                <div class="progress">
+                <div class="progress rounded-0">
                     <div class="progress-bar _bg-grey4" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
                         aria-valuemax="100" id="_progress-bar">
                         <span class="font-weight-bold _letter-spacing-02" id="_progress-title">

@@ -4,8 +4,11 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    background-color: #2e86de;
-    color: white;
+    background-color: #c8d6e5;
+}
+
+input {
+    text-align: center;
 }
 
 #_rank-image {
@@ -44,11 +47,24 @@ body {
     width: 60px;
 }
 
-<<<<<<< HEAD
 #_top_header {
     padding: 20px;
-    background-color: #222f3e;
+    background-color: #0d1722;
+    color: white;
 }
+
+#_image-container {
+    background-color: #c8d6e5;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+#_edit_fields_container {
+    color: white;
+    background-color: #2e86de;
+}
+
+/* COLOR PALETTE */
 
 ._bg-pink1 {
     background-color: #ff9ff3;
@@ -128,14 +144,4 @@ body {
 
 ._bg-grey4 {
     background-color: #222f3e;
-=======
-#_edit_fields_container {
-    transition: 300ms all;
-    border: 1px solid rgb(150, 150, 150);
-}
-
-#_edit_fields_container:hover {
-    background-color: rgb(240,240,240);
-    border: 1px solid rgb(200,200,200);
->>>>>>> 896868226a177dc4c8501a1a14f8bad97985872d
 }
