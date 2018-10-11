@@ -62,7 +62,8 @@ var taskRanksBL = (function (_serviceModule) {
     let completedTasks = 0;
     let taskPerRank = 0;
     let allRanksCount = 0;
-    let currentRankNation = "hu"; 
+    let currentRankNation = "hu";
+    let nations = [];
 
     _module.getCurrentRankNation = () => currentRankNation;
 
@@ -85,6 +86,7 @@ var taskRanksBL = (function (_serviceModule) {
                 completedTasks = data.completedTasks;
                 currentRankNation = data.currentRankNation;
                 allRanksCount = data.allRanksCount;
+                nations = data.nations;
                 computeRankStates();
                 resolve();
             });
@@ -93,10 +95,26 @@ var taskRanksBL = (function (_serviceModule) {
 
     _module.addCompletedTasks = (howMany) => {
         return _serviceModule.setCompletedTasksNumber(completedTasks + howMany);
+        let newTier = getNewRandomTier(currentRankNation);
+        //TODO: Save new tier to DB
     }
 
     _module.removeCompletedTasks = (howMany) => {
         return _serviceModule.setCompletedTasksNumber(completedTasks - howMany);
+    }
+
+    function getNewRandomTier(currentTier) {
+        if (nations.length > 1) {
+            let availableNations = nations.filter((item) => item != currentTier);
+            let randomIndex = getRandomNumber(0, availableNations.length - 1);
+            return availableNations[randomIndex];
+        } else {
+            return currentTier;
+        }
+    }
+
+    function getRandomNumber(min, max) {
+        return Math.round((Math.random() * max) + min);
     }
 
     function computeRankStates() {
