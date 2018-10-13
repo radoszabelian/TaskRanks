@@ -94,9 +94,14 @@ var taskRanksBL = (function (_serviceModule) {
     }
 
     _module.addCompletedTasks = (howMany) => {
-        return _serviceModule.setCompletedTasksNumber(completedTasks + howMany);
-        let newTier = getNewRandomTier(currentRankNation);
-        //TODO: Save new tier to DB
+        const taskNumberSavePromise = _serviceModule.setCompletedTasksNumber(completedTasks + howMany);
+        const currentTierLevelMaximum = currentTier * 1000;
+        if (completedTasks + howMany >= currentTierLevelMaximum) {
+            const newTier = getNewRandomTier(currentRankNation);
+            const tierSavePromise = _serviceModule.saveTier(newTier);
+            return Promise.all([taskNumberSavePromise, tierSavePromise]);
+        }
+        return taskNumberSavePromise;
     }
 
     _module.removeCompletedTasks = (howMany) => {
@@ -151,19 +156,22 @@ var dataService = (function (_db) {
     };
 
     _module.setCompletedTasksNumber = (completedTasksNumber) => {
+        return mergePropertiesToDb({ completedTasks: completedTasksNumber });
+    }
+
+    _module.saveTier = (newTier) => {
+        return mergePropertiesToDb({ currentRankNation: newTier });
+    }
+
+    function mergePropertiesToDb(objToMerge) {
         return new Promise((resolve, reject) => {
-            if (Number.isInteger(completedTasksNumber)) {
-                db.collection(collectionName).doc(dataId).set({
-                    completedTasks: completedTasksNumber
-                }, { merge: true })
-                    .then(() => {
-                        resolve();
-                    }, () => {
-                        reject();
-                    });
-            } else {
+            db.collection(collectionName).doc(dataId).set({
+                ...objToMerge
+            }, { merge: true }).then(() => {
+                resolve();
+            }, () => {
                 reject();
-            }
+            })
         })
     }
 
