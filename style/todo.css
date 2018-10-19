@@ -1,0 +1,88 @@
+/* COLOR PALETTE */
+
+._bg-pink1 {
+    background-color: #ff9ff3;
+}
+
+._bg-pink2 {
+    background-color: #f368e0;
+}
+
+._bg-yellow1 {
+    background-color: #feca57;
+}
+
+._bg-yellow2 {
+    background-color: #ff9f43;
+}
+
+._bg-red1 {
+    background-color: #ff6b6b;
+}
+
+._bg-red2 {
+    background-color: #ee5253;
+}
+
+._bg-lightblue1 {
+    background-color: #48dbfb;
+}
+
+._bg-lightblue2 {
+    background-color: #0abde3;
+}
+
+._bg-green1 {
+    background-color: #1dd1a1;
+}
+
+._bg-green2 {
+    background-color: #10ac84;
+}
+
+._bg-azure1 {
+    background-color: #00d2d3;
+}
+
+._bg-azure2 {
+    background-color: #01a3a4;
+}
+
+._bg-blue1 {
+    background-color: #54a0ff;
+}
+
+._bg-blue2 {
+    background-color: #2e86de;
+}
+
+._bg-purple1 {
+    background-color: #5f27cd;
+}
+
+._bg-purple2 {
+    background-color: #341f97;
+}
+
+._bg-grey1 {
+    background-color: #c8d6e5
+}
+
+._bg-grey2 {
+    background-color: #8395a7
+}
+
+._bg-grey3 {
+    background-color: #576574;
+}
+
+._bg-grey4 {
+    background-color: #222f3e;
+}
+
+.icon-flipped {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);    
+}
