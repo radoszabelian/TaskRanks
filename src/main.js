@@ -28,7 +28,6 @@ var uiController = (function (_blModule) {
                     _module.refreshUi();
                 })
             });
-
         }
         inputElement.value = 0;
     }
@@ -41,6 +40,7 @@ var uiController = (function (_blModule) {
             let rankImageElement = document.getElementById("_rank-image");
             let tierTitleElement = document.getElementById("_tier_title");
             let tierStripesContainerElement = document.getElementById("_tier-stripe-container");
+            let xpContainerElement = document.getElementById("_xp-container");
 
             completedTasksElement.innerHTML = taskRanksBL.getCompletedTasks();
             progressBarElement.setAttribute("style", `width: ${taskRanksBL.getProgressPercentage()}%`);
@@ -48,6 +48,7 @@ var uiController = (function (_blModule) {
             rankImageElement.setAttribute("src", `assets/ranks/${taskRanksBL.getCurrentRankNation()}/${taskRanksBL.getCurrentRank()}.svg`)
             tierTitleElement.innerHTML = taskRanksBL.getCurrentTier();
             generateTierStripesTo(tierStripesContainerElement);
+            xpContainerElement.innerHTML = `[ ${taskRanksBL.getCompletedTasks()} / ${(taskRanksBL.getCurrentRank())*taskRanksBL.getTaskPerRanks()} ]`;
         });
     };
 
@@ -70,6 +71,10 @@ var taskRanksBL = (function (_serviceModule) {
     _module.getCurrentRank = () => {
         return currentRank;
     };
+
+    _module.getTaskPerRanks = () => {
+        return taskPerRank;
+    }
 
     _module.getCurrentTier = () => {
         return currentTier;
