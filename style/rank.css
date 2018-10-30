@@ -61,8 +61,16 @@ input {
 }
 
 #_edit_fields_container {
-    color: white;
-    background-color: #2e86de;
+    color: #0d1722;
+    /* background-color: #2e86de; */
+    border: 1px solid #0d1722;
+    border-radius: 2px;
+    box-shadow: #0d1722 0px 0px 1px;
+    transition: all 100ms;
+}
+
+#_edit_fields_container:hover {
+    box-shadow: #0d1722 0px 0px 10px;
 }
 
 /* COLOR PALETTE */
