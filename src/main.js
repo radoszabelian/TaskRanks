@@ -48,7 +48,7 @@ var uiController = (function (_blModule) {
             rankImageElement.setAttribute("src", `assets/ranks/${taskRanksBL.getCurrentRankNation()}/${taskRanksBL.getCurrentRank()}.svg`)
             tierTitleElement.innerHTML = taskRanksBL.getCurrentTier();
             generateTierStripesTo(tierStripesContainerElement);
-            xpContainerElement.innerHTML = `[ ${taskRanksBL.getCompletedTasks()} / ${(taskRanksBL.getCurrentRank())*taskRanksBL.getTaskPerRanks()} ]`;
+            xpContainerElement.innerHTML = `[ ${taskRanksBL.getCompletedTasks()} / ${(taskRanksBL.getCurrentRank()) * taskRanksBL.getTaskPerRanks()} ]`;
         });
     };
 
@@ -114,13 +114,10 @@ var taskRanksBL = (function (_serviceModule) {
     }
 
     function getNewRandomTier(currentTier) {
-        if (nations.length > 1) {
-            let availableNations = nations.filter((item) => item != currentTier);
-            let randomIndex = getRandomNumber(0, availableNations.length - 1);
-            return availableNations[randomIndex];
-        } else {
-            return currentTier;
-        }
+        let currentIndex = nations.findIndex((value) => value == currentTier);
+        let nextindex = currentIndex == nations.length - 1 ? nextindex = 0 : currentIndex + 1;
+
+        return nations[nextindex];
     }
 
     function getRandomNumber(min, max) {
