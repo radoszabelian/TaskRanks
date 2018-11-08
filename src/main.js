@@ -100,7 +100,7 @@ var taskRanksBL = (function (_serviceModule) {
 
     _module.addCompletedTasks = (howMany) => {
         const taskNumberSavePromise = _serviceModule.setCompletedTasksNumber(completedTasks + howMany);
-        const currentTierLevelMaximum = currentTier * 1000;
+        const currentTierLevelMaximum = currentTier * 2000;
         if (completedTasks + howMany >= currentTierLevelMaximum) {
             const newTier = getNewRandomTier(currentRankNation);
             const tierSavePromise = _serviceModule.saveTier(newTier);
