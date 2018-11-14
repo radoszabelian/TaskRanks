@@ -37,7 +37,7 @@ var uiController = (function (_blModule) {
             let completedTasksElement = document.getElementById("_completed-tasks-count");
             let progressBarElement = document.getElementById("_progress-bar");
             let progressTitleElement = document.getElementById("_progress-title");
-            let rankImageElement = document.getElementById("_rank-image");
+            let rankImageElements = document.getElementsByClassName("_rank-image");
             let tierTitleElement = document.getElementById("_tier_title");
             let tierStripesContainerElement = document.getElementById("_tier-stripe-container");
             let xpContainerElement = document.getElementById("_xp-container");
@@ -45,7 +45,10 @@ var uiController = (function (_blModule) {
             completedTasksElement.innerHTML = taskRanksBL.getCompletedTasks();
             progressBarElement.setAttribute("style", `width: ${taskRanksBL.getProgressPercentage()}%`);
             progressTitleElement.innerHTML = `LEVEL ${taskRanksBL.getCurrentRank()}`;
-            rankImageElement.setAttribute("src", `assets/ranks/${taskRanksBL.getCurrentRankNation()}/${taskRanksBL.getCurrentRank()}.svg`)
+            rankImageElements[0].setAttribute("src", `assets/ranks/${taskRanksBL.getCurrentRankNation()}/${taskRanksBL.getCurrentRank()}.svg`);
+            rankImageElements[1].setAttribute("src", `assets/ranks/${taskRanksBL.getCurrentRankNation()}/${taskRanksBL.getCurrentRank()}.svg`);
+            rankImageElements[0].classList.contains("deg-90") ? null : rankImageElements[0].classList.add("deg-90");
+            rankImageElements[1].classList.contains("deg-270") ? null : rankImageElements[1].classList.add("deg-270");
             tierTitleElement.innerHTML = taskRanksBL.getCurrentTier();
             generateTierStripesTo(tierStripesContainerElement);
             xpContainerElement.innerHTML = `[ ${taskRanksBL.getCompletedTasks()} / ${(taskRanksBL.getCurrentRank()) * taskRanksBL.getTaskPerRanks()} ]`;
