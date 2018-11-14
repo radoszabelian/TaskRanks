@@ -4,7 +4,7 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
-    background-color: #c8d6e5;
+    background-color: #a4b0be;
 }
 
 input {
@@ -18,6 +18,12 @@ input {
     min-height: auto;
     width: auto;
     height: auto;
+}
+
+.rank-badge {
+    background-color: #343434;
+    border-left: 20px solid #666666;
+    border-right: 20px solid #666666;
 }
 
 .deg-90 {
@@ -63,16 +69,13 @@ input {
 }
 
 #_image-container {
-    background-color: #c8d6e5;
     padding-top: 2em;
     padding-bottom: 2em;
 }
 
 #_edit_fields_container {
     color: #0d1722;
-    /* background-color: #2e86de; */
     border: 1px solid #0d1722;
-    border-radius: 2px;
     box-shadow: #0d1722 0px 0px 1px;
     transition: all 100ms;
 }
